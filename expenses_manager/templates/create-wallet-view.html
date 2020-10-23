@@ -1,0 +1,33 @@
+{% load app_filters %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create wallet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 offset-lg-3">
+          <form class="text-center border border-light p-5" method="POST" >
+            {% csrf_token %}
+            <p class="h4 mb-4">Create wallet</p>
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+              {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+            {{ form.name|customizeInput:'class=form-control,placeholder=Wallet name,style=margin:3px;' }}
+            <span style="color: red;">{{ form.name.errors }}</span>
+            <label>Tags</label>
+            {{ form.tags|customizeInput:'class=form-control,style=margin:3px;' }}
+            <span style="color: red;">{{ form.tags.errors }}</span>
+            <button class="btn btn-info btn-block my-4" type="submit">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
